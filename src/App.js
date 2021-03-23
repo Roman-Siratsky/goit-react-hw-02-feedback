@@ -8,19 +8,36 @@ import Buttons from './components/Buttons'
 class App extends Component {
 
   state = {
-    ...this.props.state
+    good: 0,
+    neutral: 0,
+    bad: 0
   }
-  handleIncrement = () => {
-    this.setState(prevState => ({good: prevState.good + 1}))
+  handleVote = (e) => {
+    switch (e.currentTarget.textContent) {
+      case 'Good':
+        this.setState(prevState => ({ good: prevState.good + 1 }))
+        break
+      case 'Neutral':
+        this.setState(prevState => ({ neutral: prevState.neutral + 1 }))
+        break
+      case 'Bad':
+        this.setState(prevState => ({ bad: prevState.bad + 1 }))
+        break
+      default:
+        return
+    }
   }
+  // handleIncrement = () => {
+  //   this.setState(prevState => ({good: prevState.good + 1}))
+  // }
 
-  handleDecrement = () => {
-    this.setState(prevState => ({bad: prevState.bad + 1}))
-  }
+  // handleDecrement = () => {
+  //   this.setState(prevState => ({bad: prevState.bad + 1}))
+  // }
 
-  handleNeutral = () => {
-    this.setState(prevState => ({neutral: prevState.neutral + 1}))
-  }
+  // handleNeutral = () => {
+  //   this.setState(prevState => ({neutral: prevState.neutral + 1}))
+  // }
 
   totalCounter() {
     const {good, neutral, bad} = this.state
@@ -42,9 +59,7 @@ class App extends Component {
       <div>
         <h2>Please Leave Feedback</h2>
         <Buttons
-          options={[this.handleIncrement,
-            this.handleDecrement,
-            this.handleNeutral]}
+          handleVote={this.handleVote}
         />
         <Statistic
           totalCounter={this.totalCounter.bind(this)}
