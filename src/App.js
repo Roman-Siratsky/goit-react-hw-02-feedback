@@ -13,31 +13,10 @@ class App extends Component {
     bad: 0
   }
   handleVote = (e) => {
-    switch (e.currentTarget.textContent) {
-      case 'Good':
-        this.setState(prevState => ({ good: prevState.good + 1 }))
-        break
-      case 'Neutral':
-        this.setState(prevState => ({ neutral: prevState.neutral + 1 }))
-        break
-      case 'Bad':
-        this.setState(prevState => ({ bad: prevState.bad + 1 }))
-        break
-      default:
-        return
-    }
+    const { textContent } = e.currentTarget
+    const item = textContent.toLowerCase()
+    this.setState(prevState => ({[item]: prevState[item] + 1}))
   }
-  // handleIncrement = () => {
-  //   this.setState(prevState => ({good: prevState.good + 1}))
-  // }
-
-  // handleDecrement = () => {
-  //   this.setState(prevState => ({bad: prevState.bad + 1}))
-  // }
-
-  // handleNeutral = () => {
-  //   this.setState(prevState => ({neutral: prevState.neutral + 1}))
-  // }
 
   totalCounter() {
     const {good, neutral, bad} = this.state
